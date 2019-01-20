@@ -1,21 +1,15 @@
-import React, { Component } from 'react'
-
+import React, {Component} from 'react'
+import CartItem from './CartItem';
 
 class Cart extends Component {
+  render() {
+    return (
+      <div>
+        <CartItem />
+        </div>
+      )
+  }
 
-cartStyle=()=>{
-  return{
-  background: '#f4f4f4',
-  borderBottom: '1px #ccc dotted'
-}
-}
-
-render() {
-  return(
-
-  <div style={this.cartStyle()}>Cart</div>
-  )
-}
 }
 
 export default Cart

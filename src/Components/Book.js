@@ -17,7 +17,6 @@ import PropTypes from 'prop-types'
       return{
         color: "orange",
         padding: '7px 10px',
-
       }
     }
 
@@ -29,12 +28,14 @@ addBookToCart=(e)=>{
 
   render() {
    //state here = this.props.books
-   const { id , title}= this.props.book
+   const { id , title , author, price }= this.props.book
    return  (
    <div style={this.getStyle()}>
       <p>
-        <button style={this.inputStyle()} type="submit" onClick={this.props.addBookToCart.bind(this, id)}>Add To Cart</button> {' '}
-         {title}
+          <li><b>Title:</b> {title}</li>
+          <li><b>Author:</b> {author}</li>
+          <li><b>Price:</b> ${price}</li>
+          <button style={this.inputStyle()} type="submit" onClick={this.props.addBookToCart.bind(this, id)}>Add To Cart</button> {' '}
       </p>
    </div>
    )
