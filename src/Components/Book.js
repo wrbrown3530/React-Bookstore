@@ -13,29 +13,21 @@ import PropTypes from 'prop-types'
       }
     }
 
-    inputStyle=()=>{
-      return{
-        color: "orange",
-        padding: '7px 10px',
-      }
-    }
+    click = (title) => {
+    this.props.addBookToCart(title)
+  }
 
-
-
-addBookToCart=(e)=>{
-  console.log(this.props)
-}
 
   render() {
    //state here = this.props.books
-   const { id , title , author, price }= this.props.book
+   const {  title , author, price }= this.props.book
    return  (
    <div style={this.getStyle()}>
       <p>
           <li><b>Title:</b> {title}</li>
           <li><b>Author:</b> {author}</li>
           <li><b>Price:</b> ${price}</li>
-          <button style={this.inputStyle()} type="submit" onClick={this.props.addBookToCart.bind(this, id)}>Add To Cart</button> {' '}
+          <button style={btnStyle} type='button'  value={title} onClick={(e) => this.click(e.target.value)} >Add to cart</button>
       </p>
    </div>
    )
@@ -45,6 +37,12 @@ addBookToCart=(e)=>{
 //PropTypes
 Book.propTypes = {
   book: PropTypes.object.isRequired
+}
+
+let btnStyle = {
+  color: "orange",
+  padding: '7px 10px',
+  cursor: 'pointer'
 }
 
 

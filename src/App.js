@@ -12,7 +12,8 @@ import About from './Components/Pages/About'
 class App extends Component {
   state = {
     books: [],
-
+    cart: [],
+    total: [0]
   }
 
   async componentDidMount() {
@@ -21,34 +22,29 @@ class App extends Component {
     this.setState({books: json})
   }
 
-  addBookToCart = (id) => {
-    this.setState({
-      books: this.state.books.map(book => {
-        if (book.id === id) {
-          book.inCart = true
-        }
-        return book
-      })
-    })
-  }
 
-  //Add Book
+  addBookToCart = (title) => {
+      let cartBook = this.state.books.find(book => book.title === title)
+        this.setState({ cart: [...this.state.cart, cartBook], total: [...this.state.total, cartBook.price]})
+      }
+
+
+
   searchBook = (title) => {
-    console.log(this.state.books)
    this.setState({
      books: this.state.books.filter(book =>{
        let filtered = book.title.includes(title) || book.author.includes(title)
        return filtered
      })
    })
-  }
+ }
 
   render() {
     return (<Router>
       <div className="App">
         <div className="container">
           <Header/>
-          <Route exact="exact" path="/" render={props => (<React.Fragment>
+          <Route exact path="/" render={props => (<React.Fragment>
               <SearchBook searchBook={this.searchBook}/>
               <div className="row">
                 <div className="col-md-8">
@@ -56,7 +52,7 @@ class App extends Component {
                 </div>
                 <div className="col-md-4">
                   <CartHeader/>
-                  <Cart/>
+                  <Cart cart={this.state.cart} books={this.state.books} addBookToCart={this.addBookToCart} total={this.state.total}/>
                 </div>
               </div>
             </React.Fragment>)}/>
